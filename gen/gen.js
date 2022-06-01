@@ -52,12 +52,7 @@ function init() {
     }
     b.innerText = "Reset";
     bar.appendChild(b);
-    els = f.elements;
-    step = parseInt(localStorage.getItem("step"));
-    let d = JSON.parse(localStorage.getItem("data"));
-    for (let el of els) {
-        d[step]?.[el.name] && (el.value = d[step][el.name]);
-    }
+    changeStep(0);
     f.onkeydown = (e) => {
         if (e.key == "Enter" && document.activeElement != document.getElementById("submit") && document.activeElement.type != "textarea") {
             e.preventDefault();
@@ -103,6 +98,7 @@ function changeStep(to) {
 function buildInputs(s) {
     let form;
     fetch("./forms/" + s.toString() + ".html")
-        .then(res => res.text()).then(text => form = text);
+        .then(res => {console.log(res), res.text()})
+        .then(text => {console.log(text), form = text});
     f.innerHTML = form;
 }
