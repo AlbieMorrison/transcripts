@@ -98,7 +98,8 @@ function changeStep(to) {
 function buildInputs(s) {
     let form;
     fetch("./forms/" + s.toString() + ".html")
-        .then(res => {console.log(res), (window.temp1 = res), res.clone().text()})
-        .then(text => {console.log(text), form = text});
-    f.innerHTML = form;
+        .then(res => {
+            console.log(res), (window.temp1 = res),
+                res.clone().text().then(text => { console.log(text), f.innerHTML = text })
+        });
 }
