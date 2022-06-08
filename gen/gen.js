@@ -21,7 +21,7 @@ function expandedLog(item, name = "", maxDepth = 20, depth = 0) {
 !localStorage.getItem("step") && localStorage.setItem("step", "0");
 !localStorage.getItem("data") && localStorage.setItem("data", JSON.stringify([]));
 
-const steps = ["School Information", "Grading scale", "Student Information", "Content Options", "Courses"];
+const steps = ["School Information", "Grading scale", "Student Information", "Parent Information", "Content Options", "Courses"];
 const maxStep = steps.length - 1;
 
 var f, dat = {}, step, els;
@@ -59,20 +59,20 @@ function buildBar(bar) {
         s.appendChild(p);
         bar.appendChild(s);
     }
-    let nxt = document.createElement("button")
-    nxt.id = "next";
-    nxt.onclick = () => {
-        relStepChange(1);
-    }
-    nxt.innerText = "Next";
     bar.appendChild(nxt);
     let prv = document.createElement("button")
     prv.id = "next";
     prv.onclick = () => {
         relStepChange(-1);
     }
-    prv.innerText = "Next";
+    prv.innerText = "Previous";
     bar.appendChild(prv);
+    let nxt = document.createElement("button")
+    nxt.id = "next";
+    nxt.onclick = () => {
+        relStepChange(1);
+    }
+    nxt.innerText = "Next";
     let b = document.createElement("button");
     b.id = "reset";
     b.onclick = () => {
@@ -120,7 +120,7 @@ function buildInputs(s) {
     fetch("./forms/" + s.toString() + ".html").then(res => {
         res.ok
             ? res.clone().text().then(text => {
-                f.innerHTML = text;
+                f.innerHTML = "<h2>" + steps[s] + "<h2>\n<br>\n" + text;
                 for (let script of f.querySelectorAll("script")) {
                     let code = script.innerText;
                     script.remove();
@@ -129,6 +129,6 @@ function buildInputs(s) {
                     document.head.appendChild(s);
                 }
             })
-            : (alert("Form unavailable, moving back."), changeStep(s - 1));
+            : setTimeout(() => changeStep(s - 1), 1500);
     });
 }

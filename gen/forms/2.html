@@ -1,0 +1,32 @@
+<label for="student_name">Full name</label>
+<input type="text" name="student_name" required>
+<br>
+<label for="student_gender">Gender</label>
+<select name="student_gender" required>
+    <option value="M">Male</option>
+    <option value="F">Female</option>
+</select>
+<br>
+<label for="student_dob">DOB</label>
+<input type="date" name="student_dob" required>
+<br>
+<label for="student_current_grade">Student's current grade (optional)</label>
+<input type="number" name="student_current_grade" max="12">
+<br>
+<label for="student_phone">Phone number (ex. (123)-456-7890)</label>
+<input type="tel" name="student_phone" pattern="\(?[\d]{3}\)?-?[\d]{3}-?[\d]{4}" required>
+<br>
+<label for="student_email">Student email</label>
+<input type="text" name="student_email" required>
+<br>
+<label for="student_address_street">Student address</label>
+<input type="text" name="student_address_street" autocomplete="street-address" required>
+<br>
+<label for="student_address_street">City</label>
+<input type="text" name="student_address_city" autocomplete="address-level2" required>
+<label for="student_address_street">State</label>
+<input type="text" name="student_address_state" autocomplete="address-level1" required>
+<label for="student_address_street">Zip code</label>
+<input type="text" name="student_address_zip" autocomplete="postal-code" required>
+<br>
+<button id="submit" type="submit">Submit</button>
