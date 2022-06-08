@@ -18,4 +18,6 @@
         o.innerText = scale.name;
         gradeScale.appendChild(o);
     }
+    console.log("running grade scale creation");
+    console.log(gradeScale);
 })()
