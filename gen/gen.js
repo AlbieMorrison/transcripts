@@ -117,9 +117,9 @@ function relStepChange(amount) {
 }
 
 function buildInputs(s) {
-    fetch("./forms/" + s.toString() + ".html")
-        .then(res => {
-            res.clone().text().then(text => {
+    fetch("./forms/" + s.toString() + ".html").then(res => {
+        res.ok
+            ? res.clone().text().then(text => {
                 f.innerHTML = text;
                 for (let script of f.querySelectorAll("script")) {
                     let code = script.innerText;
@@ -129,5 +129,6 @@ function buildInputs(s) {
                     document.head.appendChild(s);
                 }
             })
-        });
+            : (alert("Form unavailable, moving back."), changeStep(s - 1));
+    });
 }

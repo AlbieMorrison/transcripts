@@ -3,8 +3,8 @@
 <label for="school_name">School name</label>
 <input type="text" name="school_name" required>
 <br>
-<label for="school_phone">School phone</label>
-<input type="tel" name="school_phone" required>
+<label for="school_phone">School phone (ex. (123)-456-7890)</label>
+<input type="tel" name="school_phone" pattern="\(?[\d]{3}\)?-?[\d]{3}-?[\d]{4}" required>
 <br>
 <label for="school_email">School email</label>
 <input type="text" name="school_email" required>
