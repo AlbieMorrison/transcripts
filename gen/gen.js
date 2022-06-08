@@ -119,6 +119,15 @@ function relStepChange(amount) {
 function buildInputs(s) {
     fetch("./forms/" + s.toString() + ".html")
         .then(res => {
-            res.clone().text().then(text => f.appendChild(document.createTextNode(text)))
+            res.clone().text().then(text => {
+                f.innerHTML = text;
+                for (let script of f.querySelectorAll("script")) {
+                    let code = script.innerText;
+                    script.remove();
+                    let s = document.createElement("script");
+                    s.innerHTML = code;
+                    document.head.appendChild(s);
+                }
+            })
         });
 }
