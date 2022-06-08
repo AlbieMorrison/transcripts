@@ -128,6 +128,16 @@ function buildInputs(s) {
                     s.innerHTML = code;
                     document.head.appendChild(s);
                 }
+                f.onkeydown = (e) => {
+                    if (e.key == "Enter" && document.activeElement != document.getElementById("submit") && document.activeElement.type != "textarea") {
+                        e.preventDefault();
+                    }
+                };
+                f.onsubmit = (e) => {
+                    addData();
+                    changeStep(step == maxStep ? (step = 0) : step + 1);
+                    e.preventDefault();
+                };
             })
             : setTimeout(() => changeStep(s - 1), 1500);
     });
