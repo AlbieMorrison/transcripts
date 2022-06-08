@@ -120,7 +120,7 @@ function buildInputs(s) {
     fetch("./forms/" + s.toString() + ".html").then(res => {
         res.ok
             ? res.clone().text().then(text => {
-                f.innerHTML = "<h2>" + steps[s] + "<h2>\n<br>\n" + text;
+                f.innerHTML = "<h2>" + steps[s] + "</h2>\n<br>\n" + text;
                 for (let script of f.querySelectorAll("script")) {
                     let code = script.innerText;
                     script.remove();
