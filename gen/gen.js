@@ -119,6 +119,6 @@ function relStepChange(amount) {
 function buildInputs(s) {
     fetch("./forms/" + s.toString() + ".html")
         .then(res => {
-            res.clone().text().then(text => { f.innerHTML = text })
+            res.clone().text().then(text => f.appendChild(document.createTextNode(text)))
         });
 }
