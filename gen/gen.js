@@ -21,14 +21,30 @@ function expandedLog(item, name = "", maxDepth = 20, depth = 0) {
 !localStorage.getItem("step") && localStorage.setItem("step", "0");
 !localStorage.getItem("data") && localStorage.setItem("data", JSON.stringify([]));
 
-const steps = ["School Information", "Student Information", "Content Options", "Courses"];
+const steps = ["School Information", "Grading scale", "Student Information", "Content Options", "Courses"];
 const maxStep = steps.length - 1;
 
-var bar, f, dat = {}, step, els;
+var f, dat = {}, step, els;
 
 function init() {
-    bar = document.getElementById("bar");
+    var bar = document.getElementById("bar");
     f = document.getElementById("form");
+    buildBar(bar);
+    changeStep(0);
+    f.onkeydown = (e) => {
+        if (e.key == "Enter" && document.activeElement != document.getElementById("submit") && document.activeElement.type != "textarea") {
+            e.preventDefault();
+        }
+    };
+    f.onsubmit = (e) => {
+        addData();
+        changeStep(step == maxStep ? (step = 0) : step + 1);
+        e.preventDefault();
+    };
+    setInterval(addData, 2000);
+}
+
+function buildBar(bar) {
     for (let i = 0; i <= maxStep; i++) {
         let s = document.createElement("span");
         let b = document.createElement("button");
@@ -43,6 +59,20 @@ function init() {
         s.appendChild(p);
         bar.appendChild(s);
     }
+    let nxt = document.createElement("button")
+    nxt.id = "next";
+    nxt.onclick = () => {
+        relStepChange(1);
+    }
+    nxt.innerText = "Next";
+    bar.appendChild(nxt);
+    let prv = document.createElement("button")
+    prv.id = "next";
+    prv.onclick = () => {
+        relStepChange(-1);
+    }
+    prv.innerText = "Next";
+    bar.appendChild(prv);
     let b = document.createElement("button");
     b.id = "reset";
     b.onclick = () => {
@@ -52,19 +82,6 @@ function init() {
     }
     b.innerText = "Reset";
     bar.appendChild(b);
-    changeStep(0);
-    f.onkeydown = (e) => {
-        if (e.key == "Enter" && document.activeElement != document.getElementById("submit") && document.activeElement.type != "textarea") {
-            e.preventDefault();
-        }
-    };
-    f.onsubmit = (e) => {
-        addData();
-        changeStep(step == maxStep ? (step = 0) : step + 1);
-        e.preventDefault();
-    };
-
-    setInterval(addData, 2000);
 }
 
 function addData() {
@@ -81,7 +98,6 @@ function addData() {
     localStorage.setItem("data", JSON.stringify(d));
 }
 
-// Returns whether this is new or already filled
 function changeStep(to) {
     let d = JSON.parse(localStorage.getItem("data"));
     f.reset();
@@ -93,6 +109,11 @@ function changeStep(to) {
     }
     dat = d[to] || {};
     localStorage.setItem("step", to.toString());
+}
+
+function relStepChange(amount) {
+    let to = parseInt(localStorage.getItem("step")) + amount;
+    changeStep(to);
 }
 
 function buildInputs(s) {
