@@ -121,13 +121,16 @@ function buildInputs(s) {
         res.ok
             ? res.clone().text().then(text => {
                 f.innerHTML = "<h2>" + steps[s] + "</h2>\n<br>\n" + text;
-                for (let script of f.querySelectorAll("script")) {
+                f.querySelectorAll("select").forEach((select) => {
+                    select.selectedIndex = -1;
+                });
+                f.querySelectorAll("script").forEach((script) => {
                     let code = script.innerText;
                     script.remove();
                     let s = document.createElement("script");
                     s.innerHTML = code;
                     document.head.appendChild(s);
-                }
+                });
                 f.onkeydown = (e) => {
                     if (e.key == "Enter" && document.activeElement != document.getElementById("submit") && document.activeElement.type != "textarea") {
                         e.preventDefault();
@@ -139,6 +142,6 @@ function buildInputs(s) {
                     e.preventDefault();
                 };
             })
-            : setTimeout(() => changeStep(s - 1), 1500);
+            : setTimeout(() => relStepChange(-1), 1500);
     });
 }
