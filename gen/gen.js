@@ -59,7 +59,6 @@ function buildBar(bar) {
         s.appendChild(p);
         bar.appendChild(s);
     }
-    bar.appendChild(nxt);
     let prv = document.createElement("button")
     prv.id = "next";
     prv.onclick = () => {
@@ -73,6 +72,7 @@ function buildBar(bar) {
         relStepChange(1);
     }
     nxt.innerText = "Next";
+    bar.appendChild(nxt);
     let b = document.createElement("button");
     b.id = "reset";
     b.onclick = () => {
