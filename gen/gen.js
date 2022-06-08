@@ -107,6 +107,10 @@ function changeStep(to) {
             ? d[to]?.[el.name] && (el.checked = d[to][el.name] == "on")
             : d[to]?.[el.name] && (el.value = d[to][el.name]);
     }
+    f.querySelectorAll("select").forEach((select) => {
+        select.selectedIndex = -1;
+    });
+    expandedLog(f);
     dat = d[to] || {};
     localStorage.setItem("step", to.toString());
 }
@@ -121,9 +125,6 @@ function buildInputs(s) {
         res.ok
             ? res.clone().text().then(text => {
                 f.innerHTML = "<h2>" + steps[s] + "</h2>\n<br>\n" + text;
-                f.querySelectorAll("select").forEach((select) => {
-                    select.selectedIndex = -1;
-                });
                 f.querySelectorAll("script").forEach((script) => {
                     let code = script.innerText;
                     script.remove();
