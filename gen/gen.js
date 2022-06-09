@@ -99,12 +99,12 @@ function addData() {
 }
 
 function changeStep(to) {
-    let d = JSON.parse(localStorage.getItem("data"));
     f.reset();
     buildInputs(to, fillValues, to);
 }
 
 function fillValues(to) {
+    let d = JSON.parse(localStorage.getItem("data"));
     for (let el of f.elements) {
         console.log(el);
         el.type == "checkbox"
