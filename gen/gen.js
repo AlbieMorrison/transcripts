@@ -101,7 +101,10 @@ function addData() {
 function changeStep(to) {
     let d = JSON.parse(localStorage.getItem("data"));
     f.reset();
-    buildInputs(to);
+    buildInputs(to, fillValues, to);
+}
+
+function fillValues(to) {
     for (let el of f.elements) {
         console.log(el);
         el.type == "checkbox"
@@ -121,7 +124,7 @@ function relStepChange(amount) {
     changeStep(to);
 }
 
-function buildInputs(s) {
+function buildInputs(s, callback, ...args) {
     fetch("./forms/" + s.toString() + ".html").then(res => {
         res.ok
             ? res.clone().text().then(text => {
@@ -143,6 +146,7 @@ function buildInputs(s) {
                     changeStep(step == maxStep ? (step = 0) : step + 1);
                     e.preventDefault();
                 };
+                callback(...args);
             })
             : setTimeout(() => relStepChange(-1), 1500);
     });
