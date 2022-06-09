@@ -125,13 +125,14 @@ function buildInputs(s, callback, ...args) {
         res.ok
             ? res.clone().text().then(text => {
                 f.innerHTML = "<h2>" + steps[s] + "</h2>\n<br>\n" + text;
-                document.getElementById("scripts").childNodes.forEach(child => child.remove());
+                document.getElementsByClassName("s").forEach(child => child.remove());
                 f.querySelectorAll("script").forEach((script) => {
                     let code = script.innerText;
                     script.remove();
                     let s = document.createElement("script");
                     s.innerHTML = code;
-                    document.getElementById("scripts").appendChild(s);
+                    s.className = "s";
+                    document.head.appendChild(s);
                 });
                 f.onkeydown = (e) => {
                     if (e.key == "Enter" && document.activeElement != document.getElementById("submit") && document.activeElement.type != "textarea") {
