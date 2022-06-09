@@ -93,7 +93,7 @@ function addData() {
     step = parseInt(localStorage.getItem("step"));
     let d = JSON.parse(localStorage.getItem("data"));
     d[step] = dat;
-    // d.forEach((val, idx) => Object.keys(val).length === 0 && d.splice(idx, 1));
+    d.forEach((val, idx) => Object.keys(val).length === 0 && d.splice(idx, 1));
     expandedLog(d, "d");
     localStorage.setItem("data", JSON.stringify(d));
 }
@@ -110,7 +110,7 @@ function changeStep(to) {
     f.querySelectorAll("select").forEach((select) => {
         select.selectedIndex = -1;
     });
-    expandedLog(f);
+    console.log(f);
     dat = d[to] || {};
     localStorage.setItem("step", to.toString());
 }
