@@ -106,15 +106,10 @@ function changeStep(to) {
 function fillValues(to) {
     let d = JSON.parse(localStorage.getItem("data"));
     for (let el of f.elements) {
-        console.log(el);
         el.type == "checkbox"
             ? d[to]?.[el.name] && (el.checked = d[to][el.name] == "on")
             : d[to]?.[el.name] && (el.value = d[to][el.name]);
     }
-    f.querySelectorAll("select").forEach((select) => {
-        select.selectedIndex = -1;
-    });
-    console.log(f);
     dat = d[to] || {};
     localStorage.setItem("step", to.toString());
 }

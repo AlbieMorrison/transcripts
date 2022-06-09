@@ -1,6 +1,6 @@
 <label for="grading_scale">Standard grading scales</label>
 <select name="grading_scale" id="grading_scale" required>
-
+    <option hidden disabled selected value>-- select an option --</option>
 </select>
 <br>
 <div id="grade_scale_preview"></div>
@@ -27,6 +27,5 @@
             o.innerText = scale.name;
             gradeScale.appendChild(o);
         }
-        gradeScale.selectedIndex = "-1";
     })()
 </script>
