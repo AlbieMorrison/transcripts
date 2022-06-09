@@ -125,7 +125,7 @@ function buildInputs(s, callback, ...args) {
         res.ok
             ? res.clone().text().then(text => {
                 f.innerHTML = "<h2>" + steps[s] + "</h2>\n<br>\n" + text;
-                document.getElementsByClassName("s").forEach(child => child.remove());
+                document.querySelectorAll(".s").forEach(child => child.remove());
                 f.querySelectorAll("script").forEach((script) => {
                     let code = script.innerText;
                     script.remove();
