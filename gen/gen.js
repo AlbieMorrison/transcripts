@@ -93,7 +93,7 @@ function addData() {
     step = parseInt(localStorage.getItem("step"));
     let d = JSON.parse(localStorage.getItem("data"));
     d[step] = dat;
-    d.forEach((val, idx) => Object.keys(val).length === 0 && d.splice(idx, 1));
+    // d.forEach((val, idx) => Object.keys(val).length === 0 && d.splice(idx, 1));
     expandedLog(d, "d");
     localStorage.setItem("data", JSON.stringify(d));
 }
@@ -103,6 +103,7 @@ function changeStep(to) {
     f.reset();
     buildInputs(to);
     for (let el of f.elements) {
+        console.log(el);
         el.type == "checkbox"
             ? d[to]?.[el.name] && (el.checked = d[to][el.name] == "on")
             : d[to]?.[el.name] && (el.value = d[to][el.name]);
