@@ -8,8 +8,8 @@
 <button id="submit" type="submit">Submit</button>
 <script>
     (() => {
-        let gradeScale = document.getElementById("grading_scale");
-        gradeScale.onchange = () => {
+        var gradeScale = document.getElementById("grading_scale");
+        function showTable() {
             let preview = document.getElementById("grade_scale_preview");
             while (preview.firstChild) {
                 preview.removeChild(preview.firstChild);
@@ -20,6 +20,7 @@
             preview.appendChild(measure);
             preview.innerHTML += gradingScales[idx].table;
         }
+        gradeScale.onchange = showTable;
         for (let i = 0; i < gradingScales.length; i++) {
             let scale = gradingScales[i];
             let o = document.createElement("option");
@@ -27,5 +28,9 @@
             o.innerText = scale.name;
             gradeScale.appendChild(o);
         }
+        addEventListener("message", (msg) => {
+            console.log(msg);
+            msg.data == "vf" && showTable(); 
+        });
     })()
 </script>

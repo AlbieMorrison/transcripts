@@ -112,6 +112,7 @@ function fillValues(to) {
     }
     dat = d[to] || {};
     localStorage.setItem("step", to.toString());
+    window.postMessage("vf");
 }
 
 function relStepChange(amount) {
